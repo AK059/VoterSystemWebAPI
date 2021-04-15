@@ -1,0 +1,180 @@
+﻿@page
+@model VoterSystemWebAPI.Pages.IndexModel
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>CRUD Data Table for Database with Modal Form</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    @*<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>*@
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!--here we add css and jscript-->
+    <link href="~/cs/main.css" rel="stylesheet" />
+
+    <script src="~/js/jscript.js"></script>
+
+<!--display here body-->
+</head>
+<body>
+    <!-- Add Navigation here
+        <nav> </nav>
+    -->
+    <!-- main -->
+    <div class="container-xl">
+        <div class="table-responsive">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h2><b>Voter System</b></h2>
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="#addApplicantModal" class="btn btn-info" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Applicant</span></a>
+                        </div>
+                    </div>
+                </div>
+                <!--give color here in table-->
+                <table class="table table-striped table-hover" style="background: radial-gradient(#cbe292b5, #e0131359);">
+                    <thead>
+                        <tr> <th colspan="4" id="counter" style="padding-left:400px">Counter </th> </tr>
+                        <tr>
+                            <!--add titles here-->
+                            <th><b>FirstName</b></th><!--Add Firstname-->
+                            <th><b>LastName</b></th><!--Add Lastname-->
+                            <th><b>Age</b></th><!--Add Age-->
+                            <th><b>Address</b></th><!--Add Address-->
+                            <th><b>Phone</b></th><!--Add Phone-->
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <!---here give id-allApplicant in table body-->
+                   <tbody id="allApplicant">
+                     </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Add Modal HTML -->
+    <div id="addApplicantModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="javascript:void(0);" method="POST" onsubmit="addItem()"><!--display form here-->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Applicant</h4>
+                        <button type="button" class="close" data-dismiss="modal"  aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <!--display here all lables and id in div class-->
+                            <label><b>FirstName</b></label>
+                            <input class="form-control" id="add-firstname" type="text"  required>
+                        </div>
+                        <div class="form-group">
+                            <label><b>lastname</b></label>
+                            <input id="add-lastname" type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label><b>Age</b></label>
+                            <input id="add-age" type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label><b>Address</b></label>
+                            <input id="add-address" type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label><b>Phone</b></label>
+                            <input id="add-phone" type="text" class="form-control" required>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer"><!--add footer here-->
+                        <input type="button" class="btn btn-info" data-dismiss="modal" value="Cancel">
+                        <input type="submit" class="btn btn-info" value="Add">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Edit Modal HTML -->
+    <div id="editApplicantModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form class="my-form">
+                    <div class="modal-header">
+                        <!---here add heading-->
+                        <h4 class="modal-title">Edit Applicant</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <!---here add id in modal body-->
+                        <div class="form-group">
+                            <input id="edit-id" type="hidden" class="form-control"><!--add id-->
+
+                        </div>
+                        <div class="form-group">
+                            <label>FirstName</label>
+                            <input id="edit-firstname" type="text" class="form-control" required=""><!--add edit id firstname-->
+                        </div>
+                        <div class="form-group">
+                            <label>LastName</label>
+                            <input id="edit-lastname" type="text" class="form-control" required=""><!--add edit id lastname-->
+                        </div>
+                        <div class="form-group">
+                            <label>Age</label>
+                            <input id="edit-age" type="text" class="form-control" required=""><!--add edit id Age-->
+                        </div>
+                        <div class="form-group">
+                            <label>Address</label>
+                            <input id="edit-address" type="text" class="form-control" required=""><!--add edit id Address-->
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input id="edit-phone" type="text" class="form-control" required=""><!--add edit id phone-->
+                        </div>
+                    </div>
+                    <!--add footer here-->
+                    <div class="modal-footer">
+                    <input type="button" class="btn btn-info" data-dismiss="modal" value="Cancel">
+                        <input onclick="saveItem();" type="submit" class="btn btn-info" value="Save">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Delete Modal HTML -->
+    <div id="deleteApplicantModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form>
+                    <div class="modal-header">
+                        <h4 class="modal-title">Delete Applicant</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            @* To get the id of item you want to delete*@
+                            <input id="delete-id" type="hidden" class="form-control" value="">
+                        </div>
+                        <p><b>Are you sure you want to delete this Applicant?</b></p>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-info" data-dismiss="modal" value="Cancel">
+                        <input onclick="deleteApplicant($('#delete-id').val())" id="delete-item" type="submit" class="btn btn-info" value="Delete">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
